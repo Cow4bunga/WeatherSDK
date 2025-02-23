@@ -1,0 +1,30 @@
+@startuml
+
+actor User
+participant "WeatherSdkController" as Controller
+participant "ForecastService" as Service
+participant "WeatherApiClient" as Client
+participant "WeatherMapper" as Mapper
+participant "WeatherCache" as Cache
+participant "OpenWeatherMapResponse" as WeatherResponse
+participant "ForecastResponse" as Forecast
+
+User -> Controller : getForecast(apiKey, cityName)
+Controller -> Service : getForecastByCityName(cityName)
+alt Cache Hit
+    Service -> Cache : get(cityName)
+    Cache --> Service : ForecastResponse
+    Service --> Controller : ForecastResponse
+else Cache Miss
+    Service -> Cache : get(cityName)
+    Cache --> Service : null
+    Service -> Client : getWeatherByCityName(cityName)
+    Client --> Service : WeatherResponse
+    Service -> Mapper : toForecastResponse(WeatherResponse)
+    Mapper --> Service : ForecastResponse
+    Service -> Cache : put(cityName, ForecastResponse)
+    Cache --> Service :
+    Service --> Controller : ForecastResponse
+end
+
+@enduml

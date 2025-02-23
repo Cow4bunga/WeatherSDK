@@ -14,12 +14,11 @@ public interface WeatherMapper {
     @Mapping(target = "visibility", source = "main.visibility")
     @Mapping(target = "datetime", source = "dt")
     @Mapping(target = "sys", source = "sys")
-    @Mapping(target = "timezone", constant = "0") // Adjust timezone as necessary
+    @Mapping(target = "timezone", constant = "0")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "weather", source = "weather", qualifiedByName = "mapWeather")
     ForecastResponse toForecastResponse(OpenWeatherMapResponse weatherResponse);
 
-    // Map nested objects
     default ForecastResponse.Temperature mapToTemperature(OpenWeatherMapResponse.Main main) {
         return new ForecastResponse.Temperature(main.getTemp(), main.getFeels_like());
     }
@@ -32,13 +31,12 @@ public interface WeatherMapper {
         return new ForecastResponse.Sys(sys.getSunrise(), sys.getSunset());
     }
 
-    // Custom mapping method for Weather array
     @Named("mapWeather")
     default ForecastResponse.Weather mapWeather(OpenWeatherMapResponse.Weather[] weatherArray) {
         if (weatherArray != null && weatherArray.length > 0) {
-            OpenWeatherMapResponse.Weather weather = weatherArray[0]; // Take the first element
+            OpenWeatherMapResponse.Weather weather = weatherArray[0];
             return new ForecastResponse.Weather(weather.getMain(), weather.getDescription());
         }
-        return null; // Return null if the array is empty
+        return null;
     }
 }

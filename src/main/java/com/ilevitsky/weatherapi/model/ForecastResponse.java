@@ -1,8 +1,5 @@
 package com.ilevitsky.weatherapi.model;
 
-import lombok.Builder;
-
-@Builder
 public record ForecastResponse(
         Weather weather,
         Temperature temperature,

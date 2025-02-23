@@ -5,5 +5,5 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RestPoint {
-    public static final String WEATHER = "/weather";
+    public static final String SDK = "/sdk";
 }

@@ -5,10 +5,12 @@ import com.ilevitsky.weatherapi.model.Mode;
 import com.ilevitsky.weatherapi.service.ForecastService;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
 @RequiredArgsConstructor
 public class WeatherSdkFactory {
     private static final Map<String, WeatherSdk> sdkInstances = new HashMap<>();
@@ -19,7 +21,7 @@ public class WeatherSdkFactory {
             throw new SdkCreationException(String.format("An SDK instance with %s API key already exists.", apiKey));
         }
 
-        WeatherSdk sdkInstance = new WeatherSdk(forecastService, mode);
+        WeatherSdk sdkInstance = new WeatherSdk(forecastService, mode, apiKey);
         sdkInstances.put(apiKey, sdkInstance);
         return sdkInstance;
     }
