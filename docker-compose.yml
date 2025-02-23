@@ -1,0 +1,14 @@
+version: '3.8'
+
+networks:
+  weather-sdk-network:
+
+services:
+  weather-sdk:
+    image: weather-sdk
+    container_name: weather-sdk
+    build: .
+    ports:
+      - "8084:8084"
+    networks:
+      - weather-sdk-network

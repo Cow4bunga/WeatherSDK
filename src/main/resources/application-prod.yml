@@ -1,0 +1,13 @@
+server:
+  port: 8084
+springdoc:
+  api-docs:
+    path: /api-docs
+openweatherapi:
+  api-key: insertmyapikey
+  weatherApiUrl: http://api.openweathermap.org/data/2.5/weather
+  geocodingApiUrl: http://api.openweathermap.org/geo/1.0/direct
+cache-size:
+  maxSize: 10
+polling:
+  mode:
