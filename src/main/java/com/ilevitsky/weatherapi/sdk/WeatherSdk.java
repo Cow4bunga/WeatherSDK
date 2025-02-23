@@ -14,10 +14,6 @@ public class WeatherSdk {
     private final Mode mode;
     private final String apiKey;
 
-    public void deleteCity(String cityName) {
-        forecastService.remove(cityName);
-    }
-
     @Scheduled(fixedRate = 100000)
     public void scheduledTask() {
         if (mode.equals(Mode.POLLING)) {

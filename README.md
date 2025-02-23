@@ -32,8 +32,19 @@ http://localhost:8084/swagger-ui/index.html
 - **Get Forecast**: `GET /sdk/{apiKey}/forecast/{cityName}`
 - **Delete SDK**: `DELETE /sdk/{apiKey}`
 
+## Flow
+The application operates as follows:
+
+1. **Create SDK**:
+    - The user sends a `POST` request to the `/sdk/{apiKey}/{mode}` endpoint to create a new SDK instance. This initializes the SDK with the provided API key and mode.
+
+2. **Get Forecast**:
+    - To retrieve weather information, the user sends a `GET` request to the `/sdk/{apiKey}/forecast/{cityName}` endpoint, specifying the city name. The application fetches the forecast data and returns it to the user.
+
+3. **Delete SDK**:
+    - When the user no longer needs the SDK, they can send a `DELETE` request to the `/sdk/{apiKey}` endpoint to remove the SDK instance.
+
 ## Sequence Diagram
-Below is the sequence diagram for the SDK interactions.
 
 Below is the sequence diagram for the SDK interactions.
 
