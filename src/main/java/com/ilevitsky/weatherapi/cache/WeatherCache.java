@@ -1,6 +1,7 @@
 package com.ilevitsky.weatherapi.cache;
 
 import com.ilevitsky.weatherapi.model.ForecastResponse;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -16,12 +17,12 @@ public class WeatherCache {
     private final Map<String, WeatherCacheEntry> cache;
 
     public WeatherCache() {
-        this.cache = new LinkedHashMap<String, WeatherCacheEntry>() {
+        this.cache = Collections.synchronizedMap(new LinkedHashMap<String, WeatherCacheEntry>() {
             @Override
             protected boolean removeEldestEntry(Map.Entry<String, WeatherCacheEntry> eldest) {
                 return size() > maxSize;
             }
-        };
+        });
     }
 
     public ForecastResponse get(String cityName) {
